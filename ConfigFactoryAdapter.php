@@ -37,7 +37,7 @@ class ConfigFactoryAdapter extends Factory implements ConfigInterface
             $composerModuleConfig = self::_loadComposerModulesConfig();
             $localModulesConfig = self::_loadLocalModulesConfig();
             $globalConfig = self::_loadGlobalConfig();
-            //@todo implement DB config | Override this via Service Manager in other module
+            //@todo implement DB config
 
             if ($composerModuleConfig instanceof ZendConfig && $localModulesConfig instanceof ZendConfig) {
                 $config = $composerModuleConfig->merge($localModulesConfig);

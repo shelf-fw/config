@@ -8,9 +8,9 @@ namespace Shelf\Config\Composer;
  */
 interface ComposerHelperInterface
 {
-    const JSON_INSTALLED_FILE = __DIR__ . '/../../../../../vendor/composer/installed.json';
-    const SHELF_MODULE_TYPE = 'shelf_module';
-    const VENDOR_PATH = __DIR__ . '/../../../../../vendor';
+    const JSON_INSTALLED_FILE = BP . 'vendor/composer/installed.json';
+    const SHELF_MODULE_TYPE = 'shelf-module';
+    const VENDOR_PATH = BP . 'vendor';
 
     /**
      * Get all Shelf Modules Installed via Composer

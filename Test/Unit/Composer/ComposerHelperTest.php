@@ -24,15 +24,15 @@ class ComposerHelperTest extends TestCase
         $this->composerHelper->setAllPackages([
             [
                 'name' => 'shelf/example_module',
-                'type' => 'shelf_module'
+                'type' => 'shelf-module'
             ]
         ]);
 
         $installedModules = $this->composerHelper->getInstalledModules();
 
-        $this->assertEquals('shelf_module', $installedModules[0]['type']);
+        $this->assertEquals('shelf-module', $installedModules[0]['type']);
         $this->assertSame(
-            realpath(__DIR__ . '/../../../Composer') . '/../../../../../vendor/shelf/example_module',
+            BP . 'vendor/shelf/example_module',
             $installedModules[0]['path']
         );
 
@@ -48,7 +48,7 @@ class ComposerHelperTest extends TestCase
         $this->composerHelper->setAllPackages([
             [
                 'name' => 'shelf/example_module',
-                'type' => 'shelf_module'
+                'type' => 'shelf-module'
             ]
         ]);
         $this->composerHelper->setCheckDirExists(true);
