@@ -1,0 +1,21 @@
+{
+    "name": "shelf/config",
+    "type": "shelf-module",
+    "require": {
+        "zendframework/zend-config": "^3.1"
+    },
+    "authors": [
+        {
+            "name": "Rafael Ortega Bueno",
+            "email": "rorteg@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shelf\\Config\\" : ""
+        }
+    },
+    "require-dev": {
+        "mikey179/vfsStream": "^1.6"
+    }
+}
