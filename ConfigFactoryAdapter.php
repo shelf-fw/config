@@ -95,10 +95,10 @@ class ConfigFactoryAdapter extends Factory implements ConfigInterface
             }, $installedModules);
 
             /** @var \Zend\Config\Config $settings */
-            $settings = $settingsArray[0];
+            $settings = count($settingsArray) ? $settingsArray[0] : [];
 
-            if (count($settingsArray) < 1) {
-                for ($i = 0; $i <= count($settingsArray); $i++){
+            if (count($settingsArray) > 1) {
+                for ($i = 0; $i < count($settingsArray); $i++){
                     if ($i != 0) {
                         $settings->merge($settingsArray[$i]);
                     }

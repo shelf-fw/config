@@ -31,14 +31,14 @@ class ComposerHelper implements ComposerHelperInterface
     {
         if (! $this->installedModules) {
             $allPackages = $this->getAllComposerInstalledPackages();
-            $this->installedModules = array_filter(
+            $this->installedModules = array_values(array_filter(
                 $allPackages,
                 function ($package) {
                     if ($package['type'] == self::SHELF_MODULE_TYPE) {
                         return true;
                     }
                 }
-            );
+            ));
         }
 
         $this->addModulesPath();
