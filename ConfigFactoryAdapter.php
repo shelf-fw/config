@@ -5,6 +5,7 @@ namespace Shelf\Config;
 use Shelf\Config\Composer\ComposerHelper;
 use Zend\Config\Config as ZendConfig;
 use Zend\Config\Factory;
+use Zend\Config\Writer\PhpArray;
 
 /**
  * Class ConfigFactoryAdapter
@@ -29,14 +30,22 @@ class ConfigFactoryAdapter extends Factory implements ConfigInterface
      *  - Global Rewrite Modules
      *  - Local Modules
      *  - Composer Modules
-     * @return \Zend\Config\Config
+     * @return \Zend\Config\Config|array
      */
     public static function getConfig()
     {
         if (! self::$_config) {
+            $config = [];
+            $globalConfig = self::_loadGlobalConfig();
+
+            if ($globalConfig->get(self::CONFIG_CACHE_KEY) == true
+                && file_exists(self::CONFIG_CACHE_FILE)) {
+                self::$_config = self::fromFile(self::CONFIG_CACHE_FILE);
+                return self::$_config;
+            }
+
             $composerModuleConfig = self::_loadComposerModulesConfig();
             $localModulesConfig = self::_loadLocalModulesConfig();
-            $globalConfig = self::_loadGlobalConfig();
             //@todo implement DB config
 
             if ($composerModuleConfig instanceof ZendConfig && $localModulesConfig instanceof ZendConfig) {
@@ -49,6 +58,14 @@ class ConfigFactoryAdapter extends Factory implements ConfigInterface
                 $config->merge($globalConfig);
             } else {
                 $config = $globalConfig;
+            }
+
+            if ($globalConfig->get(self::CONFIG_CACHE_KEY) == true) {
+                (new PhpArray())->toFile(self::CONFIG_CACHE_FILE, $config);
+            } else {
+                if (file_exists(self::CONFIG_CACHE_FILE)) {
+                    unlink(self::CONFIG_CACHE_FILE);
+                }
             }
 
             self::$_config = $config;
