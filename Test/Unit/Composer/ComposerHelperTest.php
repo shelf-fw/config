@@ -32,7 +32,7 @@ class ComposerHelperTest extends TestCase
 
         $this->assertEquals('shelf-module', $installedModules[0]['type']);
         $this->assertSame(
-            BP . 'vendor/shelf/example_module',
+            BP . '/vendor/shelf/example_module',
             $installedModules[0]['path']
         );
 
