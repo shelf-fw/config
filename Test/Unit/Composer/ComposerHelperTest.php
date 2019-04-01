@@ -55,11 +55,4 @@ class ComposerHelperTest extends TestCase
         $installedModules = $this->composerHelper->getInstalledModules();
 
     }
-
-    public function testGetINstalledModulesIfNotExists()
-    {
-        $this->composerHelper->setAllPackages(null);
-
-        $this->assertCount(0, $this->composerHelper->getInstalledModules());
-    }
 }
